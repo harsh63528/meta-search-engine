@@ -1,9 +1,14 @@
 import asyncHandler from "../utils/asyncHandler.js";
 import SearchHistory from "../models/searchHistory.model.js";
 
-const historyController = asyncHandler(async (req, res) => {
+/**
+ * Get logged-in user's search history
+ */
+export const historyController = asyncHandler(async (req, res) => {
 
-  const history = await SearchHistory.find()
+  const history = await SearchHistory.find({
+    user: req.user._id
+  })
     .sort({ createdAt: -1 })
     .limit(20);
 
@@ -14,38 +19,39 @@ const historyController = asyncHandler(async (req, res) => {
   });
 });
 
+
+/**
+ * Track click for a search result
+ */
 export const trackClickController = asyncHandler(async (req, res) => {
 
   const { historyId, title, url, type } = req.body;
 
   if (!historyId || !url) {
-    return res.status(400).json({
-      success: false,
-      message: "Missing required fields"
-    });
+    res.status(400);
+    throw new Error("Missing required fields");
   }
 
-  const history = await SearchHistory.findOne({
-    _id: historyId,
-    user: req.user._id
-  });
+  const updated = await SearchHistory.findOneAndUpdate(
+    {
+      _id: historyId,
+      user: req.user._id
+    },
+    {
+      $push: {
+        clicks: { title, url, type }
+      }
+    },
+    { new: true }
+  );
 
-  if (!history) {
-    return res.status(404).json({
-      success: false,
-      message: "Search record not found"
-    });
+  if (!updated) {
+    res.status(404);
+    throw new Error("Search record not found");
   }
-
-  history.clicks.push({ title, url, type });
-
-  await history.save();
 
   res.json({
     success: true,
     message: "Click tracked successfully"
   });
 });
-
-
-export default historyController;

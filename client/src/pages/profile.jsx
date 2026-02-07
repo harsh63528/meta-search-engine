@@ -3,6 +3,7 @@ import useAuth from "../hooks/useAuth";
 
 const Profile = () => {
   const { user } = useAuth();
+  console.log("Profile page - user:", user);
 
   if (!user) {
     return (

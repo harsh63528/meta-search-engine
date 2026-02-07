@@ -9,6 +9,7 @@ import useSearch from "../hooks/useSearch.js";
 import { searchQuery } from "../api/search.api.js";
 
 const Results = () => {
+  
   const [params] = useSearchParams();
   const q = params.get("q");
 
@@ -75,5 +76,6 @@ const Results = () => {
     </div>
   );
 };
+
 
 export default Results;

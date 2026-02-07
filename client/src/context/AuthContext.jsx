@@ -10,11 +10,15 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = async () => {
     try {
       const res = await getProfile();
-      setUser(res.data);
+
+      // 🔥 FIX HERE
+      setUser(res.data.user);  
+
     } catch {
       setUser(null);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
