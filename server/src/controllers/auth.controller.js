@@ -11,11 +11,11 @@ const generateToken = (id) => {
 };
 
 // Register
-export const registerUser = asyncHandler(async (req, res) => {
+export const registerUser = async (req, res) => {
 
   const { name, email, password } = req.body;
 
-  if (!name.trim() || !email.trim() || !password.trim()) {
+  if (!name || !email || !password) {
     return res.status(400).json({
       success: false,
       message: "All fields are required"
@@ -54,7 +54,7 @@ export const registerUser = asyncHandler(async (req, res) => {
       email: user.email
     }
   });
-});
+};
 
 // Login
 export const loginUser = asyncHandler(async (req, res) => {

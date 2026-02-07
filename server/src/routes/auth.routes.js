@@ -21,7 +21,7 @@ router.put(
   upload.single("image"),
   updateProfileImage
 );
-router.get("/me", authMiddleware,GetProfile )
+router.get("/me", authMiddleware, GetProfile);
 
 
 export default router;
