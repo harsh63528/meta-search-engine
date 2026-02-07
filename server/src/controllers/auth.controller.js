@@ -15,7 +15,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 
   const { name, email, password } = req.body;
 
-  if (!name || !email || !password) {
+  if (!name.trim() || !email.trim() || !password.trim()) {
     return res.status(400).json({
       success: false,
       message: "All fields are required"
@@ -41,7 +41,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 
   res.cookie("token", token, {
     httpOnly: true,
-    secure: false, // true in production
+    secure: process.env.STAGE === "production" ? true : false, // true in production
     sameSite: "strict",
     maxAge: 7 * 24 * 60 * 60 * 1000
   });
@@ -135,4 +135,30 @@ export const updateProfileImage = asyncHandler(async (req, res) => {
 
   result.end(req.file.buffer);
 });
+
+export const GetProfile = asyncHandler(async (req, res) => {
+     const token=req.cookies?.token;
+
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized - No token provided"
+    });
+  }
+
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const user = await User.findById(decoded.id).select("-password");
+      res.json({
+        success: true,
+        user
+      });
+    } catch (error) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized - Invalid token"
+      });
+    }
+
+})
 

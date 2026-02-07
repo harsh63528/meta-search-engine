@@ -2,7 +2,8 @@ import express from "express";
 import {
   registerUser,
   loginUser,
-  logoutUser
+  logoutUser,
+  GetProfile
 } from "../controllers/auth.controller.js";
 import upload from "../middleware/upload.middleware.js";
 import { updateProfileImage } from "../controllers/auth.controller.js";
@@ -20,6 +21,7 @@ router.put(
   upload.single("image"),
   updateProfileImage
 );
+router.get("/me", authMiddleware,GetProfile )
 
 
 export default router;

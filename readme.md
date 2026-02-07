@@ -9,6 +9,24 @@
 3. npm install / i
 4. npm start/nodemon src/index.js (for backend folder)
 
+# improvement
+
+1.  sanitization
+
+# algorithms
+
+1.  Full JWT auth
+
+2.  Profile image upload
+
+3.  Search system
+
+4.  Click tracking
+
+5.  History tracking
+
+6.  Layered backend architecture
+
 # remain
 
 1.  mongodb link from mongodb atlas for online data base
