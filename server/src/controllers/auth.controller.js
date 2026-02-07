@@ -136,6 +136,7 @@ export const updateProfileImage = asyncHandler(async (req, res) => {
   result.end(req.file.buffer);
 });
 
+// check on load
 export const GetProfile = asyncHandler(async (req, res) => {
      const token=req.cookies?.token;
 
