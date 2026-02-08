@@ -59,7 +59,7 @@ Meta Search Engine is a full-stack web application that allows users to:
 ┌─────────────────────────────────────────────────────────────┐
 │                      Frontend (React + Vite)                 │
 │  ┌──────────────────────────────────────────────────────┐   │
-│  │ Pages: Home, Search, Login, Register, Profile        │   │
+│  │ Pages: Home, Search, Login, Register, Profile, History│  │
 │  │ Components: Navbar, SearchBar, Cards, Tabs           │   │
 │  │ Context: AuthContext, SearchContext                  │   │
 │  └──────────────────────────────────────────────────────┘   │
@@ -209,7 +209,7 @@ server/
 - **routes/** - Define API endpoints
 - **services/** - Core business logic separated from controllers
 - **utils/** - Reusable helper functions
-- **validators/** - Input validation schemas
+- **validators/** - Input validation with `validateRegister()`, `validateLogin()`, `validateSearch()`, `validateClickTrack()`
 
 ### Frontend Structure
 
@@ -229,7 +229,9 @@ client/
 │   │   │   └── SearchTabs.jsx
 │   │   ├── results/
 │   │   │   ├── WebCard.jsx
-│   │   │   └── ImageCard.jsx
+│   │   │   ├── ImageCard.jsx
+│   │   │   ├── VideoCard.jsx
+│   │   │   └── ArticleCard.jsx
 │   │   └── history/       # Search history components
 │   ├── context/           # React Context for state management
 │   │   ├── AuthContext.jsx
@@ -242,6 +244,7 @@ client/
 │   │   ├── Login.jsx
 │   │   ├── Register.jsx
 │   │   ├── Profile.jsx
+│   │   ├── History.jsx
 │   │   └── Results.jsx
 │   ├── utils/             # Utility functions
 │   │   └── ProtectedRoute.jsx
@@ -404,16 +407,15 @@ client/
 
 ## Future Improvements
 
-1. **Input Sanitization** - Prevent XSS and SQL injection attacks
-2. **Real API Integration** - Connect to actual search engines (Google, Bing, etc.)
-3. **Advanced Analytics** - Dashboard showing search trends
-4. **Search Filters** - Filter results by date, relevance, etc.
-5. **Saved Searches** - Users can save favorite search queries
-6. **Dark Mode** - Theme toggle for user comfort
-7. **Mobile Optimization** - Responsive design improvements
-8. **Rate Limiting** - Prevent abuse of API endpoints
-9. **Caching** - Improve search performance with result caching
-10. **TypeScript** - Add type safety to the codebase
+1. **Real API Integration** - Connect to actual search engines (Google, Bing, etc.)
+2. **Advanced Analytics** - Dashboard showing search trends
+3. **Search Filters** - Filter results by date, relevance, etc.
+4. **Saved Searches** - Users can save favorite search queries
+5. **Dark Mode** - Theme toggle for user comfort
+6. **Mobile Optimization** - Responsive design improvements
+7. **Rate Limiting** - Prevent abuse of API endpoints
+8. **Caching** - Improve search performance with result caching
+9. **TypeScript** - Add type safety to the codebase
 
 ---
 

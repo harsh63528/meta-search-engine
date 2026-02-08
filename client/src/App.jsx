@@ -3,7 +3,8 @@ import Home from "./pages/Home";
 import Results from "./pages/Results";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Profile from "./pages/profile";
+import Profile from "./pages/Profile";
+import History from "./pages/History";
 import { AuthProvider } from "./context/AuthContext";
 import { SearchProvider } from "./context/SearchContext";
 import ProtectedRoute from "./utils/ProtectedRoute.jsx";
@@ -20,7 +21,7 @@ function App() {
             <Route path="/search" element={<Results />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            
+            <Route path="/history" element={ <ProtectedRoute> <History /> </ProtectedRoute> }/>
           </Routes>
         </BrowserRouter>
       </SearchProvider>

@@ -29,6 +29,9 @@ const Navbar = () => {
       <div className="flex gap-3">
         {user ? (
             <>
+            <Link to="/history" className="btn btn-ghost">
+      History
+    </Link>
             <Link to="/profile" className="btn btn-ghost">
       Profile
     </Link>

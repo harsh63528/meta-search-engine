@@ -5,6 +5,8 @@ import SearchBar from "../components/search/SearchBar.jsx";
 import SearchTabs from "../components/search/SearchTabs.jsx";
 import WebCard from "../components/results/WebCard.jsx";
 import ImageCard from "../components/results/ImageCard.jsx";
+import VideoCard from "../components/results/VideoCard.jsx";
+import ArticleCard from "../components/results/ArticleCard.jsx";
 import useSearch from "../hooks/useSearch.js";
 import { searchQuery } from "../api/search.api.js";
 
@@ -64,13 +66,18 @@ const Results = () => {
 
         {!loading && results.length > 0 && (
           <div className="mt-5 space-y-4">
-            {results.map((item, i) =>
-              item.type === "image" ? (
-                <ImageCard key={i} item={item} />
-              ) : (
-                <WebCard key={i} item={item} />
-              )
-            )}
+            {results.map((item, i) => {
+              switch (item.type) {
+                case "image":
+                  return <ImageCard key={i} item={item} />;
+                case "video":
+                  return <VideoCard key={i} item={item} />;
+                case "article":
+                  return <ArticleCard key={i} item={item} />;
+                default:
+                  return <WebCard key={i} item={item} />;
+              }
+            })}
           </div>
         )}
       </div>
