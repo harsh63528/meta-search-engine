@@ -18,9 +18,22 @@ const Navbar = () => {
     <div className="navbar bg-base-100 shadow-md px-6">
       {/* Logo */}
       <div className="flex-1">
-        <Link to="/" className="text-2xl font-bold text-primary">
-          MetaSearch
-        </Link>
+        <Link to="/" className="flex items-center gap-2">
+      
+      {/* Logo */}
+      <div className="avatar">
+        <div className=" glass w-10 rounded-full  text-primary-content flex items-center justify-center font-bold text-lg">
+          <img src="/src/assets/logo.png" alt="OmniSeek Logo" />
+        </div>
+      </div>
+
+      {/* Website Name */}
+      <span className="text-2xl font-bold text-primary">
+        MetaSearch
+      </span>
+
+    </Link>
+
       </div>
 
       {/* Prevent flashing before auth loads */}
