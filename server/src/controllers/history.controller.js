@@ -70,3 +70,13 @@ export const trackClickController = asyncHandler(async (req, res) => {
     message: "Click tracked successfully"
   });
 });
+
+// clear hiatory
+export const clearHistory = asyncHandler( async (req, res) => {
+  try {
+    await SearchHistory.deleteMany({ user: req.user._id });
+    res.json({ message: "History cleared successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});

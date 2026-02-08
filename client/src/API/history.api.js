@@ -5,3 +5,7 @@ export const getHistory = () =>
 
 export const trackClick = (data) =>
   axios.post("/history/click", data);
+
+export const clearHistory = () => {
+  return axios.delete("/history/clear");
+};

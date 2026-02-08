@@ -216,12 +216,13 @@ server/
 ```
 client/
 ├── src/
-│   ├── API/               # API service layer
+│   ├── api/
+│   │   ├── axiosInstance.js
 │   │   ├── auth.api.js
 │   │   ├── search.api.js
-│   │   ├── history.api.js
-│   │   └── axiosInstance.js
-│   ├── components/        # Reusable React components
+│   │   └── history.api.js
+│
+│   ├── components/
 │   │   ├── layout/
 │   │   │   └── Navbar.jsx
 │   │   ├── search/
@@ -232,29 +233,35 @@ client/
 │   │   │   ├── ImageCard.jsx
 │   │   │   ├── VideoCard.jsx
 │   │   │   └── ArticleCard.jsx
-│   │   └── history/       # Search history components
-│   ├── context/           # React Context for state management
+│   │   └── history/
+│   │       ├── HistoryCard.jsx
+│   │       ├── HistoryList.jsx
+│   │       └── ClearHistoryModal.jsx
+│
+│   ├── context/
 │   │   ├── AuthContext.jsx
 │   │   └── SearchContext.jsx
-│   ├── hooks/             # Custom React hooks
+│
+│   ├── hooks/
 │   │   ├── useAuth.js
 │   │   └── useSearch.js
-│   ├── pages/             # Full page components
+│
+│   ├── pages/
 │   │   ├── Home.jsx
 │   │   ├── Login.jsx
 │   │   ├── Register.jsx
 │   │   ├── Profile.jsx
 │   │   ├── History.jsx
 │   │   └── Results.jsx
-│   ├── utils/             # Utility functions
+│
+│   ├── routes/
 │   │   └── ProtectedRoute.jsx
-│   ├── App.jsx            # Root component
-│   ├── main.jsx           # React entry point
-│   └── index.css          # Global styles
-├── index.html
-├── vite.config.js
-├── package.json
-└── eslint.config.js
+│
+│   ├── utils/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+
 ```
 
 **Explanation:**
@@ -297,6 +304,7 @@ client/
 | ------ | -------- | ---------------------------------- |
 | GET    | `/`      | Retrieve user's search history     |
 | POST   | `/click` | Track user click on search results |
+| delete | `/clear` | delete the whole history of user   |
 
 ---
 

@@ -18,3 +18,4 @@ export const updateProfileImage = (formData) =>
       "Content-Type": "multipart/form-data",
     },
   });
+
