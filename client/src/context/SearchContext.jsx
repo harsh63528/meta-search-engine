@@ -4,7 +4,7 @@ export const SearchContext = createContext();
 
 export const SearchProvider = ({ children }) => {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState([]);   // ✅ must be array
   const [activeTab, setActiveTab] = useState("web");
   const [loading, setLoading] = useState(false);
 

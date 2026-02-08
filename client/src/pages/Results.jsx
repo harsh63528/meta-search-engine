@@ -2,14 +2,13 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar.jsx";
 import SearchBar from "../components/search/SearchBar.jsx";
-import SearchTabs from "../components/search/searchTabs.jsx";
+import SearchTabs from "../components/search/SearchTabs.jsx";
 import WebCard from "../components/results/WebCard.jsx";
 import ImageCard from "../components/results/ImageCard.jsx";
 import useSearch from "../hooks/useSearch.js";
 import { searchQuery } from "../api/search.api.js";
 
 const Results = () => {
-  
   const [params] = useSearchParams();
   const q = params.get("q");
 
@@ -31,9 +30,12 @@ const Results = () => {
 
       try {
         const res = await searchQuery(q);
-        setResults(res.data);
+
+        // 🔥 FIX: store only results array
+        setResults(res.data.results || []);
       } catch (err) {
         console.log(err);
+        setResults([]);
       }
 
       setLoading(false);
@@ -42,40 +44,46 @@ const Results = () => {
     fetchData();
   }, [q]);
 
+  // 🔥 Filter results by type
+  const filteredResults =
+    activeTab === "all"
+      ? results
+      : results.filter((item) => item.type === activeTab);
+
   return (
     <div className="min-h-screen bg-base-200">
       <Navbar />
 
       <div className="container mx-auto px-4 py-6">
-
         <SearchBar />
         <SearchTabs />
 
         {loading && (
-          <div className="text-center">
+          <div className="text-center mt-5">
             <span className="loading loading-spinner loading-lg"></span>
           </div>
         )}
 
-        {/* Web Results */}
-        {activeTab === "web" &&
-          results?.web?.map((item, i) => (
-            <WebCard key={i} item={item} />
-          ))}
-
-        {/* Image Results */}
-        {activeTab === "images" && (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {results?.images?.map((item, i) => (
-              <ImageCard key={i} item={item} />
-            ))}
+        {!loading && filteredResults.length === 0 && (
+          <div className="text-center mt-5">
+            <p>No results found</p>
           </div>
         )}
 
+        {!loading && filteredResults.length > 0 && (
+          <div className="mt-5 space-y-4">
+            {filteredResults.map((item, i) => (
+              item.type === "image" ? (
+                <ImageCard key={i} item={item} />
+              ) : (
+                <WebCard key={i} item={item} />
+              )
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 };
-
 
 export default Results;

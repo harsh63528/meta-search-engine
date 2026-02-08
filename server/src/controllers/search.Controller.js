@@ -12,7 +12,7 @@ const searchController = asyncHandler(async (req, res) => {
 
   const results = await searchService(q, type);
 
-  // ✅ Save history only if user is logged in
+  //  Save history only if user is logged in
   if (req.user) {
     await SearchHistory.create({
       user: req.user._id,
