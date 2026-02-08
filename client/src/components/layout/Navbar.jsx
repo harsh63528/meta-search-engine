@@ -2,12 +2,8 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth.js";
 import { logoutUser } from "../../api/auth.api";
 
-
-
 const Navbar = () => {
-  const { user,setUser } = useAuth();
-
-
+  const { user, setUser } = useAuth();
 
   const handleLogout = async () => {
     try {
@@ -20,25 +16,55 @@ const Navbar = () => {
 
   return (
     <div className="navbar bg-base-100 shadow-md px-6">
+      {/* Logo */}
       <div className="flex-1">
         <Link to="/" className="text-2xl font-bold text-primary">
           MetaSearch
         </Link>
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex items-center gap-3">
         {user ? (
-            <>
+          <>
+            {/* History Shortcut */}
             <Link to="/history" className="btn btn-ghost">
-      History
-    </Link>
-            <Link to="/profile" className="btn btn-ghost">
-      Profile
-    </Link>
-    <button onClick={handleLogout} className="btn btn-error">
-      Logout
-    </button></>
-          
+              History
+            </Link>
+
+            {/* Profile Dropdown */}
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    src={
+                      user.profileImage ||
+                      `https://ui-avatars.com/api/?name=${user.name}`
+                    }
+                    alt="profile"
+                  />
+                </div>
+              </div>
+
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <Link to="/profile">Profile</Link>
+                </li>
+                <li>
+                  <Link to="/history">History</Link>
+                </li>
+                <li>
+                  <button onClick={handleLogout}>Logout</button>
+                </li>
+              </ul>
+            </div>
+          </>
         ) : (
           <>
             <Link to="/login" className="btn btn-ghost">
@@ -47,7 +73,6 @@ const Navbar = () => {
             <Link to="/register" className="btn btn-primary">
               Register
             </Link>
-            
           </>
         )}
       </div>

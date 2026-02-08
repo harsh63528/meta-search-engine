@@ -105,36 +105,40 @@ export const logoutUser = asyncHandler(async (req, res) => {
 
 
 export const updateProfileImage = asyncHandler(async (req, res) => {
-
   if (!req.file) {
     return res.status(400).json({
       success: false,
-      message: "No file uploaded"
+      message: "No file uploaded",
     });
   }
 
-  const result = await cloudinary.uploader.upload_stream(
-    { folder: "meta-search-profiles" },
-    async (error, uploadResult) => {
-      if (error) {
-        return res.status(500).json({
-          success: false,
-          message: "Upload failed"
-        });
-      }
+  
+  const uploadToCloudinary = () => {
+    return new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: "meta-search-profiles" },
+        async (error, uploadResult) => {
+          if (error) return reject(error);
+          resolve(uploadResult);
+        }
+      );
 
-      req.user.profileImage = uploadResult.secure_url;
-      await req.user.save();
+      stream.end(req.file.buffer);
+    });
+  };
 
-      res.json({
-        success: true,
-        profileImage: uploadResult.secure_url
-      });
-    }
-  );
+  const uploadResult = await uploadToCloudinary();
 
-  result.end(req.file.buffer);
+  // Save image URL to user
+  req.user.profileImage = uploadResult.secure_url;
+  await req.user.save();
+
+  res.status(200).json({
+    success: true,
+    profileImage: uploadResult.secure_url,
+  });
 });
+
 
 // check on load
 export const GetProfile = asyncHandler(async (req, res) => {
