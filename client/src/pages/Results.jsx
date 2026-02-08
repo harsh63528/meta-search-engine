@@ -29,9 +29,7 @@ const Results = () => {
       setLoading(true);
 
       try {
-        const res = await searchQuery(q);
-
-        // 🔥 FIX: store only results array
+        const res = await searchQuery(q, activeTab);
         setResults(res.data.results || []);
       } catch (err) {
         console.log(err);
@@ -42,13 +40,7 @@ const Results = () => {
     };
 
     fetchData();
-  }, [q]);
-
-  // 🔥 Filter results by type
-  const filteredResults =
-    activeTab === "all"
-      ? results
-      : results.filter((item) => item.type === activeTab);
+  }, [q, activeTab]);
 
   return (
     <div className="min-h-screen bg-base-200">
@@ -64,21 +56,21 @@ const Results = () => {
           </div>
         )}
 
-        {!loading && filteredResults.length === 0 && (
+        {!loading && results.length === 0 && (
           <div className="text-center mt-5">
             <p>No results found</p>
           </div>
         )}
 
-        {!loading && filteredResults.length > 0 && (
+        {!loading && results.length > 0 && (
           <div className="mt-5 space-y-4">
-            {filteredResults.map((item, i) => (
+            {results.map((item, i) =>
               item.type === "image" ? (
                 <ImageCard key={i} item={item} />
               ) : (
                 <WebCard key={i} item={item} />
               )
-            ))}
+            )}
           </div>
         )}
       </div>

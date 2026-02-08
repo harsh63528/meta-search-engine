@@ -25,12 +25,27 @@ export const historyController = asyncHandler(async (req, res) => {
  */
 export const trackClickController = asyncHandler(async (req, res) => {
 
-  const { historyId, title, url, type } = req.body;
+  let { historyId, id, _id, title, url, link, type } = req.body;
+
+  historyId = historyId || id || _id;
+  url = url || link;
 
   if (!historyId || !url) {
     res.status(400);
-    throw new Error("Missing required fields");
+    throw new Error("Missing required fields: historyId and url are required");
   }
+
+  const normalizeType = (t) => {
+    if (!t) return undefined;
+    const lower = t.toString().toLowerCase();
+    if (lower === "images") return "image";
+    if (lower === "videos") return "video";
+    if (lower === "articles") return "article";
+    if (lower === "webs") return "web";
+    return lower;
+  };
+
+  const normalizedType = normalizeType(type);
 
   const updated = await SearchHistory.findOneAndUpdate(
     {
@@ -39,7 +54,7 @@ export const trackClickController = asyncHandler(async (req, res) => {
     },
     {
       $push: {
-        clicks: { title, url, type }
+        clicks: { title, url, type: normalizedType }
       }
     },
     { new: true }
