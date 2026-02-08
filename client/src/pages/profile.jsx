@@ -5,40 +5,45 @@ import { updateProfileImage } from "../api/auth.api";
 
 const Profile = () => {
   const { user, setUser } = useAuth();
-  const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [preview, setPreview] = useState(null);
+  const [error, setError] = useState("");
 
   if (!user) {
     return (
       <div className="min-h-screen bg-base-200">
         <Navbar />
-        <div className="text-center mt-10">
+        <div className="text-center mt-10 text-lg">
           Please login to view profile.
         </div>
       </div>
     );
   }
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Preview image before upload
+    // 🔹 Validate file size (2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      setError("Image size must be less than 2MB");
+      return;
+    }
+
+    setError("");
+
+    // 🔹 Preview before upload
     const reader = new FileReader();
     reader.onloadend = () => {
       setPreview(reader.result);
     };
     reader.readAsDataURL(file);
 
-    uploadImage(file);
-  };
+    const formData = new FormData();
+    formData.append("image", file);
 
-  const uploadImage = async (file) => {
     try {
       setLoading(true);
-
-      const formData = new FormData();
-      formData.append("image", file);
 
       const res = await updateProfileImage(formData);
 
@@ -48,9 +53,11 @@ const Profile = () => {
         profileImage: res.data.profileImage,
       }));
 
-      setPreview(null);
+      setPreview(null); // remove preview after successful upload
+
     } catch (err) {
-      console.error("Upload failed", err);
+      console.error("Image upload failed:", err);
+      setError("Upload failed. Try again.");
     } finally {
       setLoading(false);
     }
@@ -61,44 +68,61 @@ const Profile = () => {
       <Navbar />
 
       <div className="container mx-auto px-4 py-10">
-        <div className="card bg-base-100 shadow-xl p-6 max-w-md mx-auto">
-          <h2 className="text-2xl font-bold mb-6 text-center">Profile</h2>
+        <div className="card bg-base-100 shadow-xl p-8 max-w-md mx-auto">
 
-          {/* Profile Image */}
-          <div className="flex flex-col items-center mb-6">
-            <div className="avatar">
-              <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img
-                  src={
-                    preview ||
-                    user.profileImage ||
-                    `https://ui-avatars.com/api/?name=${user.name}`
-                  }
-                  alt="Profile"
-                />
-              </div>
-            </div>
+          <h2 className="text-2xl font-bold mb-6 text-center">
+            My Profile
+          </h2>
 
-            <label className="btn btn-sm btn-outline mt-3">
-              {loading ? "Uploading..." : "Change Photo"}
-              <input
-                type="file"
-                accept="image/*"
-                hidden
-                onChange={handleImageChange}
-              />
-            </label>
-          </div>
+          {/* Profile Image Section */}
+<div className="flex flex-col items-center mb-6">
+
+  <div className="avatar">
+    <div className="w-28 rounded-full ring ring-primary ring-offset-2">
+      <img
+        src={
+          preview ||
+          user.profileImage ||
+          `https://ui-avatars.com/api/?name=${user.name}`
+        }
+        alt="Profile"
+      />
+    </div>
+  </div>
+
+  {/* Hidden File Input */}
+  <input
+    type="file"
+    id="profileImageInput"
+    accept="image/*"
+    className="hidden"
+    onChange={handleImageChange}
+  />
+
+  {/* Button triggers input manually */}
+  <button
+    className="btn btn-outline btn-sm mt-4"
+    onClick={() =>
+      document.getElementById("profileImageInput").click()
+    }
+    disabled={loading}
+  >
+    {loading ? "Uploading..." : "Change Photo"}
+  </button>
+
+</div>
+
 
           {/* User Info */}
-          <div className="space-y-2">
+          <div className="space-y-3 text-lg">
             <p>
-              <strong>Name:</strong> {user.name}
+              <span className="font-semibold">Name:</span> {user.name}
             </p>
             <p>
-              <strong>Email:</strong> {user.email}
+              <span className="font-semibold">Email:</span> {user.email}
             </p>
           </div>
+
         </div>
       </div>
     </div>

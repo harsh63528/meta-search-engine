@@ -3,14 +3,14 @@ import useAuth from "../../hooks/useAuth.js";
 import { logoutUser } from "../../api/auth.api";
 
 const Navbar = () => {
-  const { user, setUser } = useAuth();
+  const { user, setUser, loading } = useAuth();
 
   const handleLogout = async () => {
     try {
       await logoutUser();
       setUser(null);
     } catch (err) {
-      console.log(err);
+      console.error("Logout failed:", err);
     }
   };
 
@@ -23,59 +23,63 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="flex items-center gap-3">
-        {user ? (
-          <>
-            {/* History Shortcut */}
-            <Link to="/history" className="btn btn-ghost">
-              History
-            </Link>
+      {/* Prevent flashing before auth loads */}
+      {!loading && (
+        <div className="flex items-center gap-3">
+          {user ? (
+            <>
+              {/* History Button */}
+              <Link to="/history" className="btn btn-ghost">
+                History
+              </Link>
 
-            {/* Profile Dropdown */}
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div className="w-10 rounded-full">
-                  <img
-                    src={
-                      user.profileImage ||
-                      `https://ui-avatars.com/api/?name=${user.name}`
-                    }
-                    alt="profile"
-                  />
+              {/* Profile Dropdown */}
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full ring ring-primary ring-offset-2">
+                    <img
+                      src={
+                        user.profileImage
+                          ? `${user.profileImage}?t=${Date.now()}`
+                          : `https://ui-avatars.com/api/?name=${user.name}`
+                      }
+                      alt="profile"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-              >
-                <li>
-                  <Link to="/profile">Profile</Link>
-                </li>
-                <li>
-                  <Link to="/history">History</Link>
-                </li>
-                <li>
-                  <button onClick={handleLogout}>Logout</button>
-                </li>
-              </ul>
-            </div>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="btn btn-ghost">
-              Login
-            </Link>
-            <Link to="/register" className="btn btn-primary">
-              Register
-            </Link>
-          </>
-        )}
-      </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <Link to="/profile">Profile</Link>
+                  </li>
+                  <li>
+                    <Link to="/history">History</Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout}>Logout</button>
+                  </li>
+                </ul>
+              </div>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="btn btn-ghost">
+                Login
+              </Link>
+              <Link to="/register" className="btn btn-primary">
+                Register
+              </Link>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 };
