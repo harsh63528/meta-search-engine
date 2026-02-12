@@ -3,7 +3,7 @@ import Home from "./pages/Home.jsx";
 import Results from "./pages/Results.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
-import Profile from "./pages/profile.jsx.jsx";
+import Profile from "./pages/profile.jsx";
 import History from "./pages/History.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { SearchProvider } from "./context/SearchContext.jsx";
