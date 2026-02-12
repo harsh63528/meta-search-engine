@@ -37,6 +37,27 @@ A modern meta search engine that aggregates search results from multiple sources
 - **Multer** - Middleware for handling file uploads
 - **bcryptjs** - Password hashing library
 
+### External Search APIs
+
+#### Image Providers
+
+- Pexels API
+- Unsplash API
+
+#### Video Providers
+
+- Pexels Video API
+- YouTube Data API v3
+
+#### Web Providers
+
+- DuckDuckGo API
+- Wikipedia API
+
+#### Article Provider
+
+- Wikipedia Search API
+
 ---
 
 ## Project Overview
@@ -79,7 +100,8 @@ Meta Search Engine is a full-stack web application that allows users to:
           ┌──────────────┼──────────────┐
           ↓              ↓              ↓
     [MongoDB]    [Cloudinary]    [Search APIs]
-    (User Data)  (Profile Pics)   (Dummy Services,pexels for image)
+    (User Data)  (Profile Pics)   (images(pixels api,unsplash api),
+    video(pexels video api,youtube api),article(wikipedia api),web(duck duck go api,wikipedia api))
 ```
 
 ---
@@ -113,11 +135,15 @@ npm install
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
+
 CLOUDINARY_CLOUD_NAME=your_cloudinary_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-STAGE=development
+
 PEXELS_API_KEY=your_pexels_api_key
+UNSPLASH_ACCESS_KEY=your_unsplash_access_key
+YOUTUBE_API_KEY=your_youtube_api_key
+
 ```
 
 4. **Start the server**
