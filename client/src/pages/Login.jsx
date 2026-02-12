@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/layout/Navbar.jsx";
 import { loginUser } from "../API/auth.api.js";
-import useAuth from "../hooks/useAuth.js";
+import useAuth from "../Hooks/useAuth.js";
 
 const Login = () => {
   const navigate = useNavigate();
