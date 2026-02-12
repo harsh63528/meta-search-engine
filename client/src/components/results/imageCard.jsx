@@ -4,8 +4,8 @@ const ImageCard = ({ item }) => {
   const handleClick = () => {
     trackClick({
       title: item.title,
-      url: item.imageUrl,
-      type: "images",
+      url: item.url,  
+      type: "image",
     });
   };
 
@@ -13,9 +13,9 @@ const ImageCard = ({ item }) => {
     <div className="card bg-base-100 shadow-md">
       <figure>
         <img
-          src={item.imageUrl}
+          src={item.url}   
           alt={item.title}
-          className="rounded-xl"
+          className="rounded-xl cursor-pointer"
           onClick={handleClick}
         />
       </figure>

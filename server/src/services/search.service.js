@@ -1,3 +1,5 @@
+// src/services/search.service.js
+
 import imageService from "./image.service.js";
 import videoService from "./video.service.js";
 import webService from "./web.service.js";
@@ -5,7 +7,6 @@ import articleService from "./article.service.js";
 import removeDuplicates from "../utils/removeDuplicates.js";
 
 const searchService = async (query, type) => {
-
   let results = [];
 
   if (type === "image") {
@@ -25,15 +26,13 @@ const searchService = async (query, type) => {
       imageService(query),
       videoService(query),
       webService(query),
-      articleService(query)
+      articleService(query),
     ]);
 
     results = [...images, ...videos, ...web, ...articles];
   }
 
-  const cleanedResults = removeDuplicates(results);
-
-  return cleanedResults;
+  return removeDuplicates(results, "url");
 };
 
 export default searchService;
