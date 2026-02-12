@@ -1,5 +1,5 @@
 import Navbar from "../components/layout/Navbar.jsx";
-import SearchBar from "../components/search/SearchBar.jsx";
+import SearchBar from "../components/search/searchbar.jsx";
 
 
 
