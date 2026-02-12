@@ -1,9 +1,9 @@
 // src/services/search.service.js
 
-import imageService from "./image.service.js";
-import videoService from "./video.service.js";
-import webService from "./web.service.js";
-import articleService from "./article.service.js";
+import imageService from "./image/image.service.js";
+import videoService from "./video/video.service.js";
+import webService from "./web/web.service.js";
+import articleService from "./article/article.service.js";
 import removeDuplicates from "../utils/removeDuplicates.js";
 
 const searchService = async (query, type) => {
