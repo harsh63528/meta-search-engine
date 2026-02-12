@@ -17,7 +17,7 @@ const getCookieOptions = () => {
   return {
     httpOnly: true,
     secure: isProduction,               // true in production (HTTPS)
-    sameSite: "none",
+    sameSite: isProduction?"none":"lax",
     maxAge: 7 * 24 * 60 * 60 * 1000,    // 7 days
   };
 };
