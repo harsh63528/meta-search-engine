@@ -79,7 +79,7 @@ Meta Search Engine is a full-stack web application that allows users to:
           ┌──────────────┼──────────────┐
           ↓              ↓              ↓
     [MongoDB]    [Cloudinary]    [Search APIs]
-    (User Data)  (Profile Pics)   (Dummy Services)
+    (User Data)  (Profile Pics)   (Dummy Services,pexels for image)
 ```
 
 ---
@@ -117,6 +117,7 @@ CLOUDINARY_CLOUD_NAME=your_cloudinary_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 STAGE=development
+PEXELS_API_KEY=your_pexels_api_key
 ```
 
 4. **Start the server**
