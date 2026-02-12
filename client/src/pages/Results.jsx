@@ -7,7 +7,7 @@ import WebCard from "../components/results/webCard.jsx";
 import ImageCard from "../components/results/imageCard.jsx";
 import VideoCard from "../components/results/VideoCard.jsx";
 import ArticleCard from "../components/results/ArticleCard.jsx";
-import useSearch from "../hooks/useSearch.js";
+import useSearch from "../hooks/usesearch.js";
 import { searchQuery } from "../API/search.api.js";
 
 const Results = () => {

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import useSearch from "../../hooks/useSearch";
+import useSearch from "../../hooks/usesearch";
 
 const SearchBar = () => {
   const navigate = useNavigate();
