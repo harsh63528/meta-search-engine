@@ -1,4 +1,4 @@
-import useSearch from "../../hooks/useSearch.js";
+import useSearch from "../../Hooks/useSearch.js";
 // updatef foldername 
 
 const SearchTabs = () => {
