@@ -2,6 +2,8 @@ import Navbar from "../components/layout/Navbar.jsx";
 import SearchBar from "../components/search/SearchBar.jsx";
 
 
+
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-base-200">
