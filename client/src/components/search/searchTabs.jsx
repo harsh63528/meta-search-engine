@@ -1,4 +1,5 @@
 import useSearch from "../../hooks/useSearch.js";
+// updatef foldername 
 
 const SearchTabs = () => {
   const { activeTab, setActiveTab } = useSearch();
