@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar.jsx";
 import SearchBar from "../components/search/SearchBar.jsx";
-import SearchTabs from "../components/search/SearchTabs.jsx";
+import SearchTabs from "../components/search/searchTabs.jsx";
 import WebCard from "../components/results/webCard.jsx";
 import ImageCard from "../components/results/imageCard.jsx";
 import VideoCard from "../components/results/VideoCard.jsx";
 import ArticleCard from "../components/results/ArticleCard.jsx";
-import useSearch from "../hooks/usesearch.js";
+import useSearch from "../hooks/useSearch.js";
 import { searchQuery } from "../API/search.api.js";
 
 const Results = () => {

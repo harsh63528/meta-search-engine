@@ -1,4 +1,4 @@
-import useSearch from "../../hooks/usesearch";
+import useSearch from "../../hooks/useSearch";
 
 const SearchTabs = () => {
   const { activeTab, setActiveTab } = useSearch();
