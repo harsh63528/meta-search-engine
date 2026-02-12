@@ -43,7 +43,7 @@ export const registerUser = async (req, res) => {
     httpOnly: true,
     secure: process.env.STAGE === "production" ? true : false, // true in production
       sameSite: "lax",        
-,
+
     maxAge: 7 * 24 * 60 * 60 * 1000
   });
 
