@@ -1,6 +1,6 @@
 import express from "express";
 import searchController from "../controllers/search.Controller.js";
-import authMiddleware from "../middleware/auth.Middleware.js";
+import authMiddleware from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
