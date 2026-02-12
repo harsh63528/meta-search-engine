@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar.jsx";
 import SearchBar from "../components/search/SearchBar.jsx";
 import SearchTabs from "../components/search/SearchTabs.jsx";
-import WebCard from "../components/results/WebCard.jsx";
+import WebCard from "../components/results/webCard.jsx";
 import ImageCard from "../components/results/ImageCard.jsx";
 import VideoCard from "../components/results/VideoCard.jsx";
 import ArticleCard from "../components/results/ArticleCard.jsx";
