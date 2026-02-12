@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Navbar from "../components/layout/Navbar.jsx";
-import useAuth from "../Hooks/useAuth.js";
+import useAuth from "../hooks/useAuth.js";
 import { updateProfileImage } from "../API/auth.api.js";
 
 const Profile = () => {
