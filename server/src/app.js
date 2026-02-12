@@ -11,7 +11,7 @@ app.use(cors(
   {
     origin: [
       "http://localhost:5173",   // Vite
-    "http://localhost:3000"
+      "https://omniseek.onrender.com"
     ],
     credentials: true
   }
