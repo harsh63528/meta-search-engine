@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/layout/Navbar";
 import HistoryList from "../components/history/HistoryList";
 import ClearHistoryModal from "../components/history/ClearHistoryModal";
-import { getHistory, clearHistory } from "../api/history.api";
+import { getHistory, clearHistory } from "../API/history.api";
 import useAuth from "../hooks/useAuth";
 
 const History = () => {

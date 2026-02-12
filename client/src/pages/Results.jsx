@@ -8,7 +8,7 @@ import ImageCard from "../components/results/imageCard.jsx";
 import VideoCard from "../components/results/VideoCard.jsx";
 import ArticleCard from "../components/results/ArticleCard.jsx";
 import useSearch from "../hooks/useSearch.js";
-import { searchQuery } from "../api/search.api.js";
+import { searchQuery } from "../API/search.api.js";
 
 const Results = () => {
   const [params] = useSearchParams();

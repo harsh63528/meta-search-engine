@@ -1,4 +1,4 @@
-import { trackClick } from "../../api/history.api";
+import { trackClick } from "../../API/history.api";
 
 const ImageCard = ({ item }) => {
   const handleClick = () => {

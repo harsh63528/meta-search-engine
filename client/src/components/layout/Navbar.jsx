@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth.js";
-import { logoutUser } from "../../api/auth.api.js";
+import { logoutUser } from "../../API/auth.api.js";
 
 const Navbar = () => {
   const { user, setUser, loading } = useAuth();

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
-import { loginUser } from "../api/auth.api";
+import { loginUser } from "../API/auth.api";
 import useAuth from "../hooks/useAuth";
 
 const Login = () => {
