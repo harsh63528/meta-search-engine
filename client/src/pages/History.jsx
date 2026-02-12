@@ -3,7 +3,7 @@ import Navbar from "../components/layout/Navbar.jsx";
 import HistoryList from "../components/history/HistoryList.jsx";
 import ClearHistoryModal from "../components/history/ClearHistoryModal.jsx";
 import { getHistory, clearHistory } from "../API/history.api.js";
-import useAuth from "../hooks/useAuth.js";
+import useAuth from "../Hooks/useAuth.js";
 
 const History = () => {
   const { user, loading: authLoading } = useAuth();
