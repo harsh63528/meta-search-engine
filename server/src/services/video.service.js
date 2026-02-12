@@ -2,51 +2,89 @@
 
 import axios from "axios";
 
-const PEXELS_VIDEO_URL = "https://api.pexels.com/videos/search";
-
-const videoService = async (query) => {
-  if (!query) return [];
-
-  try {
-    const { data } = await axios.get(PEXELS_VIDEO_URL, {
+/* ===============================
+   PEXELS VIDEO ENGINE
+================================ */
+const pexelsVideoSearch = async (query) => {
+  const { data } = await axios.get(
+    "https://api.pexels.com/videos/search",
+    {
       headers: {
         Authorization: process.env.PEXELS_API_KEY,
       },
       params: {
         query,
-        per_page: 8,
+        per_page: 6,
       },
       timeout: 5000,
-    });
-
-    if (!data || !data.videos || data.videos.length === 0) {
-      return [];
     }
+  );
 
-    return data.videos.map((video) => {
-      // pick best quality file (prefer HD)
-      const bestFile =
-        video.video_files.find((file) => file.quality === "hd") ||
-        video.video_files[0];
+  if (!data?.videos) return [];
 
-      return {
-        id: video.id,
-        title: `Video ${video.id}`,
-        url: bestFile?.link,
-        thumbnail: video.image,
-        duration: video.duration,
-        width: video.width,
-        height: video.height,
+  return data.videos.map((video) => {
+    const bestFile =
+      video.video_files.find((f) => f.quality === "hd") ||
+      video.video_files[0];
+
+    return {
+      id: `pexels-${video.id}`,
+      title: `Video ${video.id}`,
+      url: bestFile?.link,
+      thumbnail: video.image,
+      duration: video.duration,
+      type: "video",
+      source: "pexels",
+    };
+  });
+};
+
+/* ===============================
+   YOUTUBE VIDEO ENGINE
+================================ */
+const youtubeVideoSearch = async (query) => {
+  const { data } = await axios.get(
+    "https://www.googleapis.com/youtube/v3/search",
+    {
+      params: {
+        key: process.env.YOUTUBE_API_KEY,
+        q: query,
+        part: "snippet",
+        maxResults: 6,
         type: "video",
-        source: "pexels",
-      };
-    });
+      },
+      timeout: 5000,
+    }
+  );
+
+  if (!data?.items) return [];
+
+  return data.items.map((item) => ({
+    id: `youtube-${item.id.videoId}`,
+    title: item.snippet.title,
+    url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+    thumbnail: item.snippet.thumbnails.medium.url,
+    type: "video",
+    source: "youtube",
+  }));
+};
+
+/* ===============================
+   MAIN VIDEO SERVICE
+================================ */
+const videoService = async (query) => {
+  if (!query) return [];
+
+  try {
+    const [pexelsResults, youtubeResults] = await Promise.all([
+      pexelsVideoSearch(query),
+      youtubeVideoSearch(query),
+    ]);
+
+    return [...pexelsResults, ...youtubeResults];
 
   } catch (error) {
-    console.error(
-      "Pexels Video API Error:",
-      error.response?.data || error.message
-    );
+    console.error("Video Service Error:", error.message);
     return [];
   }
 };
