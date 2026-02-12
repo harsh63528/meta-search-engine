@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Results from "./pages/Results";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Profile from "./pages/profile";
-import History from "./pages/History";
-import { AuthProvider } from "./context/AuthContext";
-import { SearchProvider } from "./context/SearchContext";
+import Home from "./pages/Home.jsx";
+import Results from "./pages/Results.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+import Profile from "./pages/profile.jsx.jsx";
+import History from "./pages/History.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import { SearchProvider } from "./context/SearchContext.jsx";
 import ProtectedRoute from "./utils/ProtectedRoute.jsx";
 
 

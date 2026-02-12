@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Navbar from "../components/layout/Navbar";
-import useAuth from "../hooks/useAuth";
-import { updateProfileImage } from "../API/auth.api";
+import Navbar from "../components/layout/Navbar.jsx";
+import useAuth from "../hooks/useAuth.js";
+import { updateProfileImage } from "../API/auth.api.js";
 
 const Profile = () => {
   const { user, setUser } = useAuth();

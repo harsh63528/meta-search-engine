@@ -1,4 +1,4 @@
-import { trackClick } from "../../API/history.api";
+import { trackClick } from "../../API/history.api.js";
 
 const WebCard = ({ item }) => {
   const handleClick = () => {

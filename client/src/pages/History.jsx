@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/layout/Navbar";
-import HistoryList from "../components/history/HistoryList";
-import ClearHistoryModal from "../components/history/ClearHistoryModal";
-import { getHistory, clearHistory } from "../API/history.api";
-import useAuth from "../hooks/useAuth";
+import Navbar from "../components/layout/Navbar.jsx";
+import HistoryList from "../components/history/HistoryList.jsx";
+import ClearHistoryModal from "../components/history/ClearHistoryModal.jsx";
+import { getHistory, clearHistory } from "../API/history.api.js";
+import useAuth from "../hooks/useAuth.js";
 
 const History = () => {
   const { user, loading: authLoading } = useAuth();
