@@ -20,9 +20,8 @@ export default function Home() {
 
         <SearchBar />
       </div>
-      if (user===null) {
-        <p className="text-center underline font-bold text-2xl">for search you have to log in</p>
-      }
+     { (user===null) ?<p className="text-center underline font-bold text-2xl">for search you have to log in</p>: <p className="text-center underline font-bold text-2xl">welcome {user.name}</p>}
+      
     </div>
   );
 }
