@@ -8,6 +8,7 @@ import History from "./pages/History.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { SearchProvider } from "./context/SearchContext.jsx";
 import ProtectedRoute from "./utils/ProtectedRoute.jsx";
+import useAuth from "./Hooks/useAuth.js";
 
 
 function App() {

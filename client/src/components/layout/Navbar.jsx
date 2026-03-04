@@ -23,7 +23,7 @@ const Navbar = () => {
       {/* Logo */}
       <div className="avatar">
         <div className=" glass w-10 rounded-full  text-primary-content flex items-center justify-center font-bold text-lg">
-          <img src="/src/assets/logo.png" alt="OmniSeek Logo" />
+          <img src="/logo.png" alt="OmniSeek Logo" />
         </div>
       </div>
 
