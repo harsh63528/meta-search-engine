@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import useSearch from "../../Hooks/useSearch.js";
+import { useEffect } from "react";
 
 const SearchBar = () => {
   const navigate = useNavigate();
   const { query, setQuery } = useSearch();
+
+  useEffect(() => {
+    setQuery('');
+  }, []);
 
   const handleSearch = () => {
     if (!query.trim()) return;
