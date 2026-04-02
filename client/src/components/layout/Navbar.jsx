@@ -15,45 +15,40 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 shadow-md px-6">
-      {/* Logo */}
-      <div className="flex-1">
-        <Link to="/" className="flex items-center gap-2">
+    <nav className="w-full px-6 py-3 bg-slate-900/80 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
       
-      {/* Logo */}
-      <div className="avatar">
-        <div className=" glass w-10 rounded-full  text-primary-content flex items-center justify-center font-bold text-lg">
-          <img src="/logo.png" alt="OmniSeek Logo" />
-        </div>
-      </div>
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        
+        {/* 🔷 Logo */}
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 flex items-center justify-center border border-white/10 group-hover:scale-105 transition">
+            <img src="/logo.png" alt="OmniSeek Logo" />
+          </div>
 
-      {/* Website Name */}
-      <span className="text-2xl font-bold text-primary">
-        MetaSearch
-      </span>
+          <span className="text-xl font-bold text-white tracking-wide group-hover:text-indigo-400 transition">
+            OMNISEEK
+          </span>
+        </Link>
 
-    </Link>
-
-      </div>
-
-      {/* Prevent flashing before auth loads */}
-      {!loading && (
-        <div className="flex items-center gap-3">
-          {user ? (
-            <>
-              {/* History Button */}
-              <Link to="/history" className="btn btn-ghost">
-                History
-              </Link>
-
-              {/* Profile Dropdown */}
-              <div className="dropdown dropdown-end">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle avatar"
+        {/* 🔷 Right Section */}
+        {!loading && (
+          <div className="flex items-center gap-4">
+            
+            {user ? (
+              <>
+                {/* History */}
+                <Link
+                  to="/history"
+                  className="text-slate-300 hover:text-white transition"
                 >
-                  <div className="w-10 rounded-full ring ring-primary ring-offset-2">
+                  History
+                </Link>
+
+                {/* Profile */}
+                <div className="relative group">
+                  
+                  {/* Avatar */}
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 cursor-pointer hover:scale-105 transition">
                     <img
                       src={
                         user.profileImage
@@ -61,39 +56,58 @@ const Navbar = () => {
                           : `https://ui-avatars.com/api/?name=${user.name}`
                       }
                       alt="profile"
+                      className="w-full h-full object-cover"
                     />
                   </div>
-                </div>
 
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                  {/* Dropdown */}
+                  <div className="absolute right-0 mt-3 w-48 bg-slate-900 border border-white/10 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                    
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white rounded-t-xl"
+                    >
+                      Profile
+                    </Link>
+
+                    <Link
+                      to="/history"
+                      className="block px-4 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white"
+                    >
+                      History
+                    </Link>
+
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 rounded-b-xl"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="text-slate-300 hover:text-white transition"
                 >
-                  <li>
-                    <Link to="/profile">Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/history">History</Link>
-                  </li>
-                  <li>
-                    <button onClick={handleLogout}>Logout</button>
-                  </li>
-                </ul>
-              </div>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="btn btn-ghost">
-                Login
-              </Link>
-              <Link to="/register" className="btn btn-primary">
-                Register
-              </Link>
-            </>
-          )}
-        </div>
-      )}
-    </div>
+                  Login
+                </Link>
+
+                <Link
+                  to="/register"
+                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white font-medium transition"
+                >
+                  Register
+                </Link>
+              </>
+            )}
+
+          </div>
+        )}
+      </div>
+    </nav>
   );
 };
 

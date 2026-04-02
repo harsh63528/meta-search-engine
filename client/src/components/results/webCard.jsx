@@ -10,19 +10,35 @@ const WebCard = ({ item }) => {
   };
 
   return (
-    <div className="card bg-base-100 shadow-md p-4 mb-4 hover:shadow-xl transition">
+    <div className="group p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300">
+      
+      {/* Top Row (favicon + link) */}
+      <div className="flex items-center gap-2 text-sm text-slate-400">
+        <img
+          src={`https://www.google.com/s2/favicons?domain=${item.link}`}
+          alt=""
+          className="w-4 h-4"
+        />
+        <span className="truncate">{item.link}</span>
+      </div>
+
+      {/* Title */}
       <a
         href={item.url}
         target="_blank"
         rel="noreferrer"
         onClick={handleClick}
-        className="text-primary text-lg font-semibold"
+        className="block mt-1 text-lg font-semibold text-white hover:text-indigo-400 transition"
       >
         {item.title}
       </a>
 
-      <p className="text-sm text-gray-500">{item.link}</p>
-      <p className="mt-2">{item.snippet}</p>
+      {/* Snippet */}
+      {item.snippet && (
+        <p className="mt-2 text-sm text-slate-300 line-clamp-3">
+          {item.snippet}
+        </p>
+      )}
     </div>
   );
 };

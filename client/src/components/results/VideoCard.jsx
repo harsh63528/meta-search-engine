@@ -10,37 +10,54 @@ const VideoCard = ({ item }) => {
   };
 
   return (
-    <div className="card bg-base-100 shadow-md p-4 mb-4 hover:shadow-xl transition">
-      <div className="flex gap-4">
-        {item.thumbnail && (
-          <div className="flex-shrink-0">
-            <img
-              src={item.thumbnail}
-              alt={item.title}
-              className="w-40 h-24 object-cover rounded"
-            />
-          </div>
+    <div className="flex gap-4 py-4 border-b border-white/10 group">
+      
+      {/* Thumbnail */}
+      <div className="relative flex-shrink-0">
+        <img
+          src={item.thumbnail}
+          alt={item.title}
+          className="w-40 h-24 object-cover rounded-lg group-hover:brightness-110 transition"
+        />
+
+        {/* Duration */}
+        {item.duration && (
+          <span className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded">
+            {item.duration}
+          </span>
         )}
-        <div className="flex-1">
-          <a
-            href={item.url}
-            target="_blank"
-            rel="noreferrer"
-            onClick={handleClick}
-            className="text-primary text-lg font-semibold hover:underline"
-          >
-            {item.title}
-          </a>
-          {item.channel && (
-            <p className="text-sm text-gray-500 mt-1">{item.channel}</p>
-          )}
-          {item.duration && (
-            <span className="badge badge-neutral mt-2">{item.duration}</span>
-          )}
-          {item.description && (
-            <p className="mt-2 text-sm">{item.description}</p>
-          )}
-        </div>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1">
+        
+        {/* URL */}
+        <p className="text-xs text-slate-400 truncate">
+          {item.source || "YouTube"}
+        </p>
+
+        {/* Title */}
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noreferrer"
+          onClick={handleClick}
+          className="block text-white text-lg font-medium leading-snug hover:text-indigo-400 transition"
+        >
+          {item.title}
+        </a>
+
+        {/* Description */}
+        {item.description && (
+          <p className="text-sm text-slate-300 mt-1 line-clamp-2">
+            {item.description}
+          </p>
+        )}
+
+        {/* Meta */}
+        <p className="text-xs text-slate-500 mt-1">
+          {item.channel} {item.publishedAt && `• ${item.publishedAt}`}
+        </p>
       </div>
     </div>
   );
