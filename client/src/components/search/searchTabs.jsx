@@ -11,9 +11,10 @@ const SearchTabs = () => {
   ];
 
   return (
-    <div className="flex justify-center mb-8">
+    <div className="flex justify-center mb-6 sm:mb-8 px-2">
       
-      <div className="relative flex gap-2 bg-slate-900/70 backdrop-blur-xl border border-white/10 p-1 rounded-2xl shadow-lg">
+      {/* Scroll Container */}
+      <div className="relative flex gap-2 overflow-x-auto no-scrollbar bg-slate-900/70 backdrop-blur-xl border border-white/10 p-1 rounded-2xl shadow-lg max-w-full w-full sm:w-auto">
         
         {tabs.map((tab) => {
           const isActive = activeTab === tab.value;
@@ -22,12 +23,8 @@ const SearchTabs = () => {
             <button
               key={tab.value}
               onClick={() => setActiveTab(tab.value)}
-              className={`relative px-5 py-2 rounded-xl text-sm font-medium transition-all duration-300
-                ${
-                  isActive
-                    ? "text-white"
-                    : "text-slate-400 hover:text-white"
-                }
+              className={`relative whitespace-nowrap px-3 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 flex-shrink-0
+                ${isActive ? "text-white" : "text-slate-400 hover:text-white"}
               `}
             >
               {/* Active Background */}
