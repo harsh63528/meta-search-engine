@@ -21,8 +21,14 @@ const Navbar = () => {
         
         {/* 🔷 Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 flex items-center justify-center border border-white/10 group-hover:scale-105 transition">
-            <img src="/logo.png" alt="OmniSeek Logo" />
+           <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-cyan-500 p-[2px] group-hover:scale-105 transition-transform duration-300">
+            <div className="w-full h-full rounded-xl bg-slate-950 flex items-center justify-center overflow-hidden">
+              <img 
+                src="/logo.png" 
+                alt="MetaSearch Logo" 
+                className="w-7 h-7 object-contain"
+              />
+            </div>
           </div>
 
           <span className="text-xl font-bold text-white tracking-wide group-hover:text-indigo-400 transition">
