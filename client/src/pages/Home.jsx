@@ -1,10 +1,14 @@
 import Navbar from "../components/layout/Navbar.jsx";
 import SearchBar from "../components/search/searchbar.jsx";
+import useAuth from "../Hooks/useAuth.js";
+import Login from "./Login.jsx";
 
 
 
 
 export default function Home() {
+  const { user } = useAuth();
+  if(user===null) return <Login/>;
   return (
     <div className="min-h-screen bg-base-200">
       <Navbar />
@@ -16,6 +20,8 @@ export default function Home() {
 
         <SearchBar />
       </div>
+     { (user===null) ?<p className="text-center underline font-bold text-2xl">for search you have to log in</p>: <p className="text-center underline font-bold text-2xl">welcome {user.name}</p>}
+      
     </div>
   );
 }

@@ -12,7 +12,7 @@ const WebCard = ({ item }) => {
   return (
     <div className="card bg-base-100 shadow-md p-4 mb-4 hover:shadow-xl transition">
       <a
-        href={item.link}
+        href={item.url}
         target="_blank"
         rel="noreferrer"
         onClick={handleClick}
