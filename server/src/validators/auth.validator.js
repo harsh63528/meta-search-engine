@@ -1,5 +1,5 @@
 /**
- * Validates registration input
+ * Validates registration input check
  * @param {Object} body - Request body with name, email, password
  * @returns {{ valid: boolean, errors: string[] }}
  */
